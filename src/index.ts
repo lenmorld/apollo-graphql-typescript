@@ -5,22 +5,67 @@ import { typeDefs } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 
 import { 
+  checkIfTableExists,
   // createUserTable, listTables, addUser, getUsers
   createUserTable2,
   findUserByEmail,
-  addUser2
+  addUser2,
+  createProjectTable,
+  // addProject,
+  createAssignmentTable,
+  // addAssignment
 } from './utils'
 
-(
-  async function() {
-    await addUser2("User Three", "user3@example.com", "abc123")
+// (
+//   async function() {
+//     await addUser2("User Three", "user3@example.com", "abc123")
 
-    const userByEmail = await findUserByEmail('user3@example.com')
-    console.log(userByEmail)
-  } 
+//     const userByEmail = await findUserByEmail('user3@example.com')
+//     console.log(userByEmail)
+//   } 
+// )()
+
+(
+  async function () {
+    const usersTableExists = await checkIfTableExists('users');
+
+    if (!usersTableExists) {
+      console.log("table doesn't exist, create table")
+      createUserTable2();
+    }
+
+    await addUser2("User Four", "user4@example.com", "abc123")
+
+    const userByEmail = await findUserByEmail('user4@example.com')
+    console.log("user found: ", userByEmail)
+
+    const projTableExists = await checkIfTableExists('projects');
+
+    if (!projTableExists) {
+      console.log("table doesn't exist, create table")
+      createProjectTable();
+    }
+
+    // addProject('Site upgrade', 'ACTIVE')
+    // addProject('Design new login form', 'ACTIVE');
+    // addProject('Database maintenance', 'COMPLETED');
+    // addProject('Onboard new devs', 'ACTIVE');
+
+    const assignmentsTableExists = await checkIfTableExists('assignments');
+
+    if (!assignmentsTableExists) {
+      console.log("table doesn't exist, create table")
+      createAssignmentTable();
+    }
+
+    // will et an error if added twice
+    // addAssignment('user3@example.com', 1, 'User Three')
+    // addAssignment('user3@example.com', 2, 'User Three')
+    // addAssignment('user4@example.com', 1, 'User Four')
+  }
 )()
 
-// createUserTable2();
+
 
 // createUserTable()
 // listTables()
