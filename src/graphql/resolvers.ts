@@ -1,6 +1,9 @@
 import { books } from '../database/mockdb'
 // import { users } from '../database/mockdb'
-import { getUsers } from '../utils'
+import { 
+  // getUsers,
+  getUsers2
+ } from '../utils'
 
 
 // Resolvers define how to fetch the types defined in your schema.
@@ -8,6 +11,7 @@ import { getUsers } from '../utils'
 export const resolvers = {
     Query: {
       books: () => books,
-      users: async () => getUsers()
+      // users: async () => getUsers()
+      users: async () => getUsers2()
     },
   };

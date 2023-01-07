@@ -19,7 +19,8 @@ export const typeDefs = gql`#graphql
   }
 
   type User {
-    id: Int,
+    # id: Int,
+    id: String,
     name: String,
     email: String,
     password: String,
@@ -27,8 +28,10 @@ export const typeDefs = gql`#graphql
   }
 
   type Project {
+    id: Int,
     title: String
-    active: Boolean,
+    status: String,
+    # active: Boolean,
     # make it required
     # active: Boolean!,
     members: [User]
